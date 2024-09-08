@@ -13,5 +13,14 @@ const io = new Server(httpServer,{
 });
 io.on('connection',(socket) => {
     console.log('server connected');
+    socket.on('beginPath',(args) => {
+        socket.broadcast.emit('beginPath',args)
+    })
+    socket.on('drawLine',(args) => {
+        socket.broadcast.emit('drawLine',args)
+    })
+    socket.on('changeConfig',(args) => {
+        socket.broadcast.emit('changeConfig',args)
+    })
 })
 httpServer.listen(5001)
